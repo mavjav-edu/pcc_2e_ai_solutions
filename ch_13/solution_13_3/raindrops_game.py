@@ -1,9 +1,9 @@
 import sys
 
 import pygame
-
-from settings import Settings
 from raindrop import Raindrop
+from settings import Settings
+
 
 class RaindropsGame:
     """Overall class to manage game assets and behavior."""
@@ -14,7 +14,8 @@ class RaindropsGame:
         self.settings = Settings()
 
         self.screen = pygame.display.set_mode(
-                (self.settings.screen_width, self.settings.screen_height))
+            (self.settings.screen_width, self.settings.screen_height)
+        )
         pygame.display.set_caption("Raindrops")
 
         self.raindrops = pygame.sprite.Group()
@@ -51,11 +52,11 @@ class RaindropsGame:
         drop_width, drop_height = drop.rect.size
         available_space_x = self.settings.screen_width - drop_width
         number_drops_x = available_space_x // (2 * drop_width)
-        
+
         # Determine the number of rows of drops that fit on the screen.
         available_space_y = self.settings.screen_height
         number_rows = available_space_y // (2 * drop_height)
-        
+
         # Fill the sky with drops.
         for row_number in range(number_rows):
             for drop_number in range(number_drops_x):
@@ -78,7 +79,7 @@ class RaindropsGame:
         pygame.display.flip()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Make a game instance, and run the game.
     rd_game = RaindropsGame()
     rd_game.run_game()

@@ -2,13 +2,13 @@ import sys
 from random import random
 
 import pygame
-
-from settings import Settings
-from game_stats import GameStats
-from button import Button
-from ship import Ship
 from bullet import Bullet
+from button import Button
+from game_stats import GameStats
+from settings import Settings
+from ship import Ship
 from target import Target
+
 
 class TargetPractice:
     """Overall class to manage game assets and behavior."""
@@ -19,7 +19,8 @@ class TargetPractice:
         self.settings = Settings()
 
         self.screen = pygame.display.set_mode(
-                (self.settings.screen_width, self.settings.screen_height))
+            (self.settings.screen_width, self.settings.screen_height)
+        )
         pygame.display.set_caption("Target Practice")
 
         # Create an instance to store game statistics.
@@ -41,7 +42,7 @@ class TargetPractice:
                 self.ship.update()
                 self._update_bullets()
                 self.target.update()
-            
+
             self._update_screen()
 
     def _check_events(self):
@@ -128,8 +129,7 @@ class TargetPractice:
 
     def _check_bullet_target_collisions(self):
         """Check whether any bullets have hit the target."""
-        collisions = pygame.sprite.spritecollide(
-                self.target, self.bullets, True)
+        collisions = pygame.sprite.spritecollide(self.target, self.bullets, True)
 
         if collisions:
             # Update stats, and see if game should speed up.
@@ -153,7 +153,7 @@ class TargetPractice:
         pygame.display.flip()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Make a game instance, and run the game.
     tp_game = TargetPractice()
     tp_game.run_game()

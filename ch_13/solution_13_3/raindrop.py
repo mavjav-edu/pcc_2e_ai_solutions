@@ -1,6 +1,7 @@
 import pygame
 from pygame.sprite import Sprite
- 
+
+
 class Raindrop(Sprite):
     """A class to represent a single raindrop."""
 
@@ -14,7 +15,7 @@ class Raindrop(Sprite):
         #   Raindrop image from: https://commons.wikimedia.org/wiki/File:Antu_raindrop.svg
         #   License: https://creativecommons.org/licenses/by-sa/3.0/deed.en
         #   Modified size, and cropped.
-        self.image = pygame.image.load('images/raindrop.png')
+        self.image = pygame.image.load("images/raindrop.png")
         self.rect = self.image.get_rect()
 
         # Start each new raindrop near the top left of the screen.

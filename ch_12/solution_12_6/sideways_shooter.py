@@ -1,10 +1,9 @@
 import sys
 
 import pygame
-
 from settings import Settings
 from ship import Ship
-from bullet import Bullet
+
 
 class SidewaysShooter:
     """Overall class to manage game assets and behavior."""
@@ -15,7 +14,8 @@ class SidewaysShooter:
         self.settings = Settings()
 
         self.screen = pygame.display.set_mode(
-                (self.settings.screen_width, self.settings.screen_height))
+            (self.settings.screen_width, self.settings.screen_height)
+        )
         pygame.display.set_caption("Sideways Shooter")
 
         self.ship = Ship(self)
@@ -59,6 +59,8 @@ class SidewaysShooter:
 
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
+        from bullet import Bullet  # Late import to avoid circular import.
+
         if len(self.bullets) < self.settings.bullets_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
@@ -70,20 +72,25 @@ class SidewaysShooter:
 
         # Get rid of bullets that have disappeared.
         for bullet in self.bullets.copy():
-            if bullet.rect.left >= self.screen.get_rect().right:
-                 self.bullets.remove(bullet)
+            if (
+                bullet.rect is not None
+                and bullet.rect.left >= self.screen.get_rect().right
+            ):
+                self.bullets.remove(bullet)
 
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
+        from bullet import Bullet  # Late import to avoid circular import.
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
         for bullet in self.bullets.sprites():
-            bullet.draw_bullet()
+            if isinstance(bullet, Bullet):
+                bullet.draw_bullet()
 
         pygame.display.flip()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Make a game instance, and run the game.
     ss_game = SidewaysShooter()
     ss_game.run_game()

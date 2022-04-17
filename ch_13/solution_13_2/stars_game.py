@@ -2,7 +2,6 @@ import sys
 from random import randint
 
 import pygame
-
 from settings import Settings
 from star import Star
 
@@ -16,7 +15,8 @@ class StarsGame:
         self.settings = Settings()
 
         self.screen = pygame.display.set_mode(
-                (self.settings.screen_width, self.settings.screen_height))
+            (self.settings.screen_width, self.settings.screen_height)
+        )
         pygame.display.set_caption("Stars")
 
         self.stars = pygame.sprite.Group()
@@ -49,13 +49,12 @@ class StarsGame:
         star_width, star_height = star.rect.size
         available_space_x = self.settings.screen_width - (star_width)
         number_stars_x = available_space_x // (2 * star_width)
-        
+
         # Determine the number of rows of stars that fit on the screen.
         #   We'll just fill most of the screen with stars.
-        available_space_y = (self.settings.screen_height -
-                                (2 * star_height))
+        available_space_y = self.settings.screen_height - (2 * star_height)
         number_rows = available_space_y // (2 * star_height)
-        
+
         # Fill the sky with stars.
         for row_number in range(number_rows):
             for star_number in range(number_stars_x):
@@ -84,7 +83,7 @@ class StarsGame:
         pygame.display.flip()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Make a game instance, and run the game.
     sg = StarsGame()
     sg.run_game()

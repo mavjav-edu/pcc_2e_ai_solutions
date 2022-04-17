@@ -1,5 +1,6 @@
 import pygame
- 
+
+
 class Target:
     """A class to manage the target."""
 
@@ -13,8 +14,9 @@ class Target:
         self.color = self.settings.target_color
 
         # Create a target rect at (0, 0) and then set correct position.
-        self.rect = pygame.Rect(0, 0, self.settings.target_width,
-            self.settings.target_height)
+        self.rect = pygame.Rect(
+            0, 0, self.settings.target_width, self.settings.target_height
+        )
         self.center_target()
 
         # Positive direction is moving down, negative is moving up.
@@ -41,7 +43,7 @@ class Target:
     def center_target(self):
         """Center the target on the right side of the screen."""
         self.rect.midright = self.screen_rect.midright
-        
+
         # Store the target's position as a decimal value.
         self.y = float(self.rect.y)
 

@@ -1,8 +1,9 @@
 import pygame
- 
+
+
 class Ship:
     """A class to manage the ship."""
- 
+
     def __init__(self, ss_game):
         """Initialize the ship and set its starting position."""
         self.screen = ss_game.screen
@@ -10,7 +11,7 @@ class Ship:
         self.screen_rect = ss_game.screen.get_rect()
 
         # Load the ship image and get its rect.
-        self.image = pygame.image.load('images/rocket_small.png')
+        self.image = pygame.image.load("images/rocket_small.png")
         self.rect = self.image.get_rect()
 
         # Start each new ship at the center of the left side of the screen.

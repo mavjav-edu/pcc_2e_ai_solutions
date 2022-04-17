@@ -1,8 +1,9 @@
 import pygame
- 
+
+
 class Rocket:
     """A class to manage the rocket."""
- 
+
     def __init__(self, r_game):
         """Initialize the rocket and set its starting position."""
         self.screen = r_game.screen
@@ -13,7 +14,7 @@ class Rocket:
         #   Rocket image from: https://opengameart.org/content/rocket
         #   License: https://creativecommons.org/licenses/by/3.0/
         #   Image was resized.
-        self.image = pygame.image.load('images/rocket_small.bmp')
+        self.image = pygame.image.load("images/rocket_small.bmp")
         self.rect = self.image.get_rect()
 
         # Start each new rocket at the center of the screen.

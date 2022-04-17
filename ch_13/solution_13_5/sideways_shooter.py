@@ -2,11 +2,11 @@ import sys
 from random import random
 
 import pygame
-
+from alien import Alien
+from bullet import Bullet
 from settings import Settings
 from ship import Ship
-from bullet import Bullet
-from alien import Alien
+
 
 class SidewaysShooter:
     """Overall class to manage game assets and behavior."""
@@ -17,7 +17,8 @@ class SidewaysShooter:
         self.settings = Settings()
 
         self.screen = pygame.display.set_mode(
-                (self.settings.screen_width, self.settings.screen_height))
+            (self.settings.screen_width, self.settings.screen_height)
+        )
         pygame.display.set_caption("Sideways Shooter")
 
         self.ship = Ship(self)
@@ -31,7 +32,6 @@ class SidewaysShooter:
 
             # Consider creating a new alien.
             self._create_alien()
-
 
             self.ship.update()
             self._update_bullets()
@@ -80,14 +80,13 @@ class SidewaysShooter:
         # Get rid of bullets that have disappeared.
         for bullet in self.bullets.copy():
             if bullet.rect.left >= self.screen.get_rect().right:
-                 self.bullets.remove(bullet)
+                self.bullets.remove(bullet)
 
         self._check_bullet_alien_collisions()
 
     def _check_bullet_alien_collisions(self):
         """Check whether any bullets have hit an alien."""
-        collisions = pygame.sprite.groupcollide(
-                self.bullets, self.aliens, True, True)
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
     def _create_alien(self):
         """Create an alien, if conditions are right."""
@@ -108,7 +107,7 @@ class SidewaysShooter:
         pygame.display.flip()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Make a game instance, and run the game.
     ss_game = SidewaysShooter()
     ss_game.run_game()

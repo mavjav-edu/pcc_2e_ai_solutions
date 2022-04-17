@@ -1,9 +1,9 @@
 import sys
 
 import pygame
-
-from settings import Settings
 from rocket import Rocket
+from settings import Settings
+
 
 class RocketGame:
     """Overall class to manage game assets and behavior."""
@@ -14,7 +14,8 @@ class RocketGame:
         self.settings = Settings()
 
         self.screen = pygame.display.set_mode(
-            (self.settings.screen_width, self.settings.screen_height))
+            (self.settings.screen_width, self.settings.screen_height)
+        )
         pygame.display.set_caption("Rocket Game")
 
         self.rocket = Rocket(self)
@@ -25,7 +26,7 @@ class RocketGame:
             self._check_events()
             self.rocket.update()
             self._update_screen()
-    
+
     def _check_events(self):
         """Respond to keypresses and mouse events."""
         for event in pygame.event.get():
@@ -68,7 +69,7 @@ class RocketGame:
         pygame.display.flip()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Make a game instance, and run the game.
     rg = RocketGame()
     rg.run_game()
