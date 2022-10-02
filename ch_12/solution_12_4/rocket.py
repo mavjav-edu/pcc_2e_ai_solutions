@@ -4,7 +4,8 @@ import pygame
 class Rocket:
     """A class to manage the rocket."""
 
-    def __init__(self, r_game):
+    from ch_12.solution_12_4.rocket_game import RocketGame
+    def __init__(self, r_game: RocketGame):
         """Initialize the rocket and set its starting position."""
         self.screen = r_game.screen
         self.settings = r_game.settings

@@ -1,4 +1,5 @@
 import pygame
+import os
 from pygame.sprite import Sprite
 
 
@@ -13,7 +14,8 @@ class Star(Sprite):
         # Load the star image and set its rect attribute.
         #   Star image from: https://opengameart.org/content/star
         #   License: public domain
-        self.image = pygame.image.load("images/star.png")
+        
+        self.image = pygame.image.load(os.path.join(os.path.dirname(__file__),"images", "star.png"))
         self.rect = self.image.get_rect()
 
         # Start each new star near the top left of the screen.
@@ -21,4 +23,5 @@ class Star(Sprite):
         self.rect.y = self.rect.height
 
         # Store the star's exact vertical position.
+        self.x = 0
         self.y = float(self.rect.y)

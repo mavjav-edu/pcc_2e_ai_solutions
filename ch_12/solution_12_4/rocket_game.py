@@ -28,7 +28,7 @@ class RocketGame:
             self._update_screen()
 
     def _check_events(self):
-        """Respond to keypresses and mouse events."""
+        """Respond to key presses and mouse events."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -38,7 +38,7 @@ class RocketGame:
                 self._check_keyup_events(event)
 
     def _check_keydown_events(self, event):
-        """Respond to keypresses."""
+        """Respond to key presses."""
         if event.key == pygame.K_RIGHT:
             self.rocket.moving_right = True
         elif event.key == pygame.K_LEFT:
