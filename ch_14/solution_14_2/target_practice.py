@@ -46,7 +46,7 @@ class TargetPractice:
             self._update_screen()
 
     def _check_events(self):
-        """Respond to keypresses and mouse events."""
+        """Respond to key presses and mouse events."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -81,7 +81,7 @@ class TargetPractice:
         pygame.mouse.set_visible(False)
 
     def _check_keydown_events(self, event):
-        """Respond to keypresses."""
+        """Respond to key presses."""
         if event.key == pygame.K_UP:
             self.ship.moving_up = True
         elif event.key == pygame.K_DOWN:
@@ -113,14 +113,14 @@ class TargetPractice:
 
         # Get rid of bullets that have disappeared.
         for bullet in self.bullets.copy():
-            if bullet.rect.left >= self.screen.get_rect().right:
+            if bullet.rect is not None and bullet.rect.left >= self.screen.get_rect().right:
                 self.bullets.remove(bullet)
                 self._increment_misses()
 
         self._check_bullet_target_collisions()
 
     def _increment_misses(self):
-        """Increment the number of misses, and check if the game shold end."""
+        """Increment the number of misses, and check if the game should end."""
         self.stats.num_misses += 1
         if self.stats.num_misses >= self.settings.miss_limit:
             self.stats.game_active = False
@@ -128,14 +128,14 @@ class TargetPractice:
 
     def _check_bullet_target_collisions(self):
         """Check whether any bullets have hit the target."""
-        collisions = pygame.sprite.spritecollide(self.target, self.bullets, True)
+        _ = pygame.sprite.spritecollide(self.target, self.bullets, True) # collisions
 
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
         for bullet in self.bullets.sprites():
-            bullet.draw_bullet()
+            Bullet(bullet).draw_bullet()
 
         self.target.draw_target()
 

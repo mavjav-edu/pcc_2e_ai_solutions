@@ -1,7 +1,7 @@
 import pygame
+from pygame.sprite import Sprite
 
-
-class Target:
+class Target(Sprite):
     """A class to manage the target."""
 
     def __init__(self, ss_game):
@@ -27,26 +27,28 @@ class Target:
         # Update the decimal position of the target.
         self.y += self.direction * self.settings.target_speed
 
-        if self.rect.top < 0:
+        if self.rect is not None and self.rect.top < 0:
             # It's moved past the top of the screen. Place at top of screen,
             #   and change direction.
             self.rect.top = 0
             self.direction = 1
-        elif self.rect.bottom > self.screen_rect.bottom:
+        elif self.rect is not None and self.rect.bottom > self.screen_rect.bottom:
             # Place at bottom, and change direction.
             self.rect.bottom = self.screen_rect.bottom
             self.direction = -1
 
         # Update the rect position.
-        self.rect.y = self.y
+        if self.rect is not None:
+            self.rect.y = self.y
 
     def center_target(self):
         """Center the target on the right side of the screen."""
-        self.rect.midright = self.screen_rect.midright
+        if self.rect is not None:
+            self.rect.midright = self.screen_rect.midright
 
         # Store the target's position as a decimal value.
-        self.y = float(self.rect.y)
+        self.y = float(self.rect.y if self.rect is not None else 0)
 
     def draw_target(self):
         """Draw the target to the screen."""
-        pygame.draw.rect(self.screen, self.color, self.rect)
+        pygame.draw.rect(self.screen, self.color, self.rect if self.rect is not None else (0,0,0,0))

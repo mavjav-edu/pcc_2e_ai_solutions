@@ -1,3 +1,4 @@
+import os
 import pygame
 from pygame.sprite import Sprite
 
@@ -15,7 +16,7 @@ class Raindrop(Sprite):
         #   Raindrop image from: https://commons.wikimedia.org/wiki/File:Antu_raindrop.svg
         #   License: https://creativecommons.org/licenses/by-sa/3.0/deed.en
         #   Modified size, and cropped.
-        self.image = pygame.image.load("images/raindrop.png")
+        self.image = pygame.image.load(os.path.join(os.path.dirname(__file__),"images", "raindrop.png"))
         self.rect = self.image.get_rect()
 
         # Start each new raindrop near the top left of the screen.
@@ -28,4 +29,5 @@ class Raindrop(Sprite):
     def update(self):
         """Move the raindrop down the screen."""
         self.y += self.settings.raindrop_speed
-        self.rect.y = self.y
+        if self.rect is not None:
+            self.rect.y = self.y

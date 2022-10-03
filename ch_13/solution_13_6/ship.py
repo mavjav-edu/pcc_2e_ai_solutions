@@ -1,7 +1,8 @@
+import os
 import pygame
+from pygame.sprite import Sprite
 
-
-class Ship:
+class Ship(Sprite):
     """A class to manage the ship."""
 
     def __init__(self, ss_game):
@@ -11,7 +12,7 @@ class Ship:
         self.screen_rect = ss_game.screen.get_rect()
 
         # Load the ship image and get its rect.
-        self.image = pygame.image.load("images/rocket_small.png")
+        self.image = pygame.image.load(os.path.join(os.path.dirname(__file__),"images", "rocket_small.png"))
         self.rect = self.image.get_rect()
 
         # Start each new ship at the center of the left side of the screen.
@@ -24,20 +25,22 @@ class Ship:
     def update(self):
         """Update the ship's position based on movement flags."""
         # Update the ship's y value, not the rect.
-        if self.moving_up and self.rect.top > 0:
+        if self.moving_up and self.rect.top if self.rect is not None else 1 > 0:
             self.y -= self.settings.ship_speed
-        if self.moving_down and self.rect.bottom < self.screen_rect.bottom:
+        if self.moving_down and self.rect.bottom if self.rect is not None else 0 < self.screen_rect.bottom:
             self.y += self.settings.ship_speed
 
-        # Update rect object from self.y.
-        self.rect.y = self.y
+        # Update rect object from self.y
+        if self.rect is not None:
+            self.rect.y = int(self.y)
 
     def center_ship(self):
         """Center the ship on the left side of the screen."""
-        self.rect.midleft = self.screen_rect.midleft
+        if self.rect is not None:
+            self.rect.midleft = self.screen_rect.midleft
 
         # Store a decimal value for the ship's vertical position.
-        self.y = float(self.rect.y)
+        self.y = float(self.rect.y if self.rect is not None else 0)
 
     def blitme(self):
         """Draw the ship at its current location."""

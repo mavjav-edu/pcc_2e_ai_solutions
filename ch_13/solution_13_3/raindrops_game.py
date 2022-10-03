@@ -29,7 +29,7 @@ class RaindropsGame:
             self._update_screen()
 
     def _check_events(self):
-        """Respond to keypresses and mouse events."""
+        """Respond to key presses and mouse events."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -37,7 +37,7 @@ class RaindropsGame:
                 self._check_keydown_events(event)
 
     def _check_keydown_events(self, event):
-        """Respond to keypresses."""
+        """Respond to key presses."""
         if event.key == pygame.K_q:
             sys.exit()
 
@@ -49,7 +49,7 @@ class RaindropsGame:
         #   If you're working with smaller drops, there might be a better
         #   approach to spacing.
         drop = Raindrop(self)
-        drop_width, drop_height = drop.rect.size
+        drop_width, drop_height = drop.rect.size if drop.rect is not None else (0,0)
         available_space_x = self.settings.screen_width - drop_width
         number_drops_x = available_space_x // (2 * drop_width)
 
@@ -65,10 +65,11 @@ class RaindropsGame:
     def _create_drop(self, drop_number, row_number):
         """Create an drop and place it in the row."""
         drop = Raindrop(self)
-        drop_width, drop_height = drop.rect.size
-        drop.rect.x = drop_width + 2 * drop_width * drop_number
-        drop.y = 2 * drop.rect.height * row_number
-        drop.rect.y = drop.y
+        drop_width, drop_height = drop.rect.size if drop.rect is not None else (0,0)
+        if drop.rect is not None:
+            drop.rect.x = drop_width + 2 * drop_width * drop_number
+            drop.y = 2 * drop.rect.height * row_number
+            drop.rect.y = drop.y
         self.raindrops.add(drop)
 
     def _update_screen(self):

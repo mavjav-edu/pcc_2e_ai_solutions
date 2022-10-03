@@ -61,6 +61,6 @@ class Settings:
         if diff_setting == "easy":
             print("easy")
         elif diff_setting == "medium":
-            pass
+            print("medium")
         elif diff_setting == "difficult":
-            pass
+            print("difficult")

@@ -26,8 +26,9 @@ class Bullet(Sprite):
         # Update the decimal position of the bullet.
         self.x += self.settings.bullet_speed
         # Update the rect position.
-        self.rect.x = self.x
+        if self.rect is not None:
+            self.rect.x = self.x
 
     def draw_bullet(self):
         """Draw the bullet to the screen."""
-        pygame.draw.rect(self.screen, self.color, self.rect)
+        pygame.draw.rect(self.screen, self.color, self.rect if self.rect is not None else (0,0,0,0))

@@ -28,7 +28,7 @@ class StarsGame:
             self._update_screen()
 
     def _check_events(self):
-        """Respond to keypresses and mouse events."""
+        """Respond to key presses and mouse events."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -36,7 +36,7 @@ class StarsGame:
                 self._check_keydown_events(event)
 
     def _check_keydown_events(self, event):
-        """Respond to keypresses."""
+        """Respond to key presses."""
         if event.key == pygame.K_q:
             sys.exit()
 
