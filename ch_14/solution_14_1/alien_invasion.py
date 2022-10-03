@@ -48,7 +48,7 @@ class AlienInvasion:
             self._update_screen()
 
     def _check_events(self):
-        """Respond to keypresses and mouse events."""
+        """Respond to key presses and mouse events."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -84,7 +84,7 @@ class AlienInvasion:
         pygame.mouse.set_visible(False)
 
     def _check_keydown_events(self, event):
-        """Respond to keypresses."""
+        """Respond to key presses."""
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
@@ -116,7 +116,7 @@ class AlienInvasion:
 
         # Get rid of bullets that have disappeared.
         for bullet in self.bullets.copy():
-            if bullet.rect.bottom <= 0:
+            if bullet.rect.bottom if bullet.rect is not None else 1 <= 0:
                 self.bullets.remove(bullet)
 
         self._check_bullet_alien_collisions()
@@ -150,7 +150,7 @@ class AlienInvasion:
         """Check if any aliens have reached the bottom of the screen."""
         screen_rect = self.screen.get_rect()
         for alien in self.aliens.sprites():
-            if alien.rect.bottom >= screen_rect.bottom:
+            if alien.rect.bottom if alien.rect is not None else 0 >= screen_rect.bottom:
                 # Treat this the same as if the ship got hit.
                 self._ship_hit()
                 break
@@ -180,12 +180,12 @@ class AlienInvasion:
         # Create an alien and find the number of aliens in a row.
         # Spacing between each alien is equal to one alien width.
         alien = Alien(self)
-        alien_width, alien_height = alien.rect.size
+        alien_width, alien_height = alien.rect.size if alien.rect is not None else (0,0)
         available_space_x = self.settings.screen_width - (2 * alien_width)
         number_aliens_x = available_space_x // (2 * alien_width)
 
         # Determine the number of rows of aliens that fit on the screen.
-        ship_height = self.ship.rect.height
+        ship_height = self.ship.rect.height if self.ship.rect is not None else 0
         available_space_y = (
             self.settings.screen_height - (3 * alien_height) - ship_height
         )
@@ -199,23 +199,25 @@ class AlienInvasion:
     def _create_alien(self, alien_number, row_number):
         """Create an alien and place it in the row."""
         alien = Alien(self)
-        alien_width, alien_height = alien.rect.size
+        alien_width, alien_height = alien.rect.size if alien.rect is not None else (0,0)
         alien.x = alien_width + 2 * alien_width * alien_number
-        alien.rect.x = alien.x
-        alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
+        if alien.rect is not None:
+            alien.rect.x = alien.x
+            alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
         self.aliens.add(alien)
 
     def _check_fleet_edges(self):
         """Respond appropriately if any aliens have reached an edge."""
         for alien in self.aliens.sprites():
-            if alien.check_edges():
+            if Alien(alien).check_edges():
                 self._change_fleet_direction()
                 break
 
     def _change_fleet_direction(self):
         """Drop the entire fleet and change the fleet's direction."""
         for alien in self.aliens.sprites():
-            alien.rect.y += self.settings.fleet_drop_speed
+            if alien.rect is not None:
+                alien.rect.y += self.settings.fleet_drop_speed
         self.settings.fleet_direction *= -1
 
     def _update_screen(self):
@@ -223,7 +225,7 @@ class AlienInvasion:
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
         for bullet in self.bullets.sprites():
-            bullet.draw_bullet()
+            Bullet(bullet).draw_bullet()
         self.aliens.draw(self.screen)
 
         # Draw the play button if the game is inactive.

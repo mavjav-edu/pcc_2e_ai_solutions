@@ -1,3 +1,4 @@
+import os
 import pygame
 
 
@@ -11,7 +12,7 @@ class Ship:
         self.screen_rect = ss_game.screen.get_rect()
 
         # Load the ship image and get its rect.
-        self.image = pygame.image.load("images/rocket_small.png")
+        self.image = pygame.image.load(os.path.join(os.path.dirname(__file__),"images", "rocket_small.png"))
         self.rect = self.image.get_rect()
 
         # Start each new ship at the center of the left side of the screen.
@@ -30,7 +31,7 @@ class Ship:
             self.y += self.settings.ship_speed
 
         # Update rect object from self.y.
-        self.rect.y = self.y
+        self.rect.y = int(self.y)
 
     def center_ship(self):
         """Center the ship on the left side of the screen."""

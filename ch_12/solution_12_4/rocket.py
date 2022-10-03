@@ -42,8 +42,8 @@ class Rocket:
             self.y += self.settings.rocket_speed
 
         # Update rect object from position attributes.
-        self.rect.x = self.x
-        self.rect.y = self.y
+        self.rect.x = int(self.x)
+        self.rect.y = int(self.y)
 
     def blitme(self):
         """Draw the rocket at its current location."""

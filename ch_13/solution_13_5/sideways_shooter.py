@@ -39,7 +39,7 @@ class SidewaysShooter:
             self._update_screen()
 
     def _check_events(self):
-        """Respond to keypresses and mouse events."""
+        """Respond to key presses and mouse events."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -49,7 +49,7 @@ class SidewaysShooter:
                 self._check_keyup_events(event)
 
     def _check_keydown_events(self, event):
-        """Respond to keypresses."""
+        """Respond to key presses."""
         if event.key == pygame.K_UP:
             self.ship.moving_up = True
         elif event.key == pygame.K_DOWN:
@@ -79,7 +79,7 @@ class SidewaysShooter:
 
         # Get rid of bullets that have disappeared.
         for bullet in self.bullets.copy():
-            if bullet.rect.left >= self.screen.get_rect().right:
+            if bullet.rect.left if bullet.rect is not None else 0 >= self.screen.get_rect().right:
                 self.bullets.remove(bullet)
 
         self._check_bullet_alien_collisions()
@@ -100,7 +100,7 @@ class SidewaysShooter:
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
         for bullet in self.bullets.sprites():
-            bullet.draw_bullet()
+            Bullet(bullet).draw_bullet()
 
         self.aliens.draw(self.screen)
 

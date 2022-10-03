@@ -4,6 +4,9 @@
     "blitme",
     "KEYDOWN",
     "keyup",
+    "midbottom",
+    "midleft",
+    "midright",
     "pygame"
   ]
 }

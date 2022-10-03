@@ -7,7 +7,7 @@ class Scoreboard:
     """A class to report scoring information."""
 
     def __init__(self, ai_game):
-        """Initialize scorekeeping attributes."""
+        """Initialize score keeping attributes."""
         self.ai_game = ai_game
         self.screen = ai_game.screen
         self.screen_rect = self.screen.get_rect()
@@ -16,7 +16,7 @@ class Scoreboard:
 
         # Font settings for scoring information.
         self.text_color = (30, 30, 30)
-        self.font = pygame.font.SysFont(None, 48)
+        self.font = pygame.font.SysFont("", 48)
 
         # Prepare the initial score images.
         self.prep_score()
@@ -67,8 +67,9 @@ class Scoreboard:
         self.ships = Group()
         for ship_number in range(self.stats.ships_left):
             ship = Ship(self.ai_game)
-            ship.rect.x = 10 + ship_number * ship.rect.width
-            ship.rect.y = 10
+            if ship.rect is not None:
+                ship.rect.x = 10 + ship_number * ship.rect.width
+                ship.rect.y = 10
             self.ships.add(ship)
 
     def check_high_score(self):
