@@ -1,4 +1,5 @@
 import os
+
 import pygame
 
 
@@ -12,7 +13,9 @@ class Ship:
         self.screen_rect = ss_game.screen.get_rect()
 
         # Load the ship image and get its rect.
-        self.image = pygame.image.load(os.path.join(os.path.dirname(__file__),"images", "rocket_small.png"))
+        self.image = pygame.image.load(
+            os.path.join(os.path.dirname(__file__), "images", "rocket_small.png")
+        )
         self.rect = self.image.get_rect()
 
         # Start each new ship at the center of the left side of the screen.

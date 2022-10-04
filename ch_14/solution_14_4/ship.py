@@ -1,6 +1,8 @@
 import os
+
 import pygame
 from pygame.sprite import Sprite
+
 
 class Ship(Sprite):
     """A class to manage the ship."""
@@ -12,7 +14,9 @@ class Ship(Sprite):
         self.screen_rect = ai_game.screen.get_rect()
 
         # Load the ship image and get its rect.
-        self.image = pygame.image.load(os.path.join(os.path.dirname(__file__),"images", "ship.bmp"))
+        self.image = pygame.image.load(
+            os.path.join(os.path.dirname(__file__), "images", "ship.bmp")
+        )
         self.rect = self.image.get_rect()
 
         # Start each new ship at the bottom center of the screen.
@@ -28,7 +32,11 @@ class Ship(Sprite):
     def update(self):
         """Update the ship's position based on movement flags."""
         # Update the ship's x value, not the rect.
-        if self.moving_right and self.rect is not None and self.rect.right < self.screen_rect.right:
+        if (
+            self.moving_right
+            and self.rect is not None
+            and self.rect.right < self.screen_rect.right
+        ):
             self.x += self.settings.ship_speed
         if self.moving_left and self.rect is not None and self.rect.left > 0:
             self.x -= self.settings.ship_speed

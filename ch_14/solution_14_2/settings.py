@@ -22,7 +22,7 @@ class Settings:
         # Target settings
         self.target_height = 120
         self.target_width = 15
-        self.target_color = (180, 60,10)
+        self.target_color = (180, 60, 10)
 
         self.target_speed = 1.5
 

@@ -1,5 +1,5 @@
-import pygame.font
 import pygame
+import pygame.font
 
 
 class Button:
